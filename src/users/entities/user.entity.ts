@@ -8,7 +8,7 @@ import { ApiProperty } from "@nestjs/swagger";
 })
 export class User extends Document {
   @ApiProperty({
-    example: 'vladislav.va@room4.team',
+    example: 'email@example.com',
   })
   @Prop({
     unique: true,

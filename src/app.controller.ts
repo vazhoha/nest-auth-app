@@ -18,7 +18,6 @@ import {
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
-  OmitType
 } from "@nestjs/swagger";
 import { AccessTokenDto } from "./auth/dto/access-token.dto";
 import { ProfileResponseDto } from "./auth/dto/profile-response.dto";

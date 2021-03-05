@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class UserCredentialsDto {
   @ApiProperty({
-    example: 'vladislav.va@room4.team',
+    example: 'email@example.com',
   })
   @IsEmail()
   email: string;
