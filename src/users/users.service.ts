@@ -42,7 +42,7 @@ export class UsersService {
 
     try {
       await user.save();
-      const { password, ...result } = user;
+      const { password, ...result } = user.toObject();
       return result;
     } catch (e) {
       if (e.code == 11000) {
