@@ -1,5 +1,5 @@
 import { AccessTokenDto } from "./access-token.dto";
 import { User } from "../../users/entities/user.entity";
-import { IntersectionType } from "@nestjs/swagger";
+import { IntersectionType, OmitType } from "@nestjs/swagger";
 
-export class ProfileResponseDto extends IntersectionType(User, AccessTokenDto) {}
+export class ProfileResponseDto extends IntersectionType(OmitType(User, ["password"] as const), AccessTokenDto) {}

@@ -7,13 +7,19 @@ import {
   Body,
   HttpStatus,
   HttpCode,
-  UnauthorizedException, UsePipes, ValidationPipe
 } from '@nestjs/common';
 import { AuthService } from "./auth/auth.service";
 import { LocalAuthGuard } from "./auth/local-auth.guard";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { UserCredentialsDto } from "./auth/dto/user-credentials.dto";
-import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+  OmitType
+} from "@nestjs/swagger";
 import { User } from "./users/entities/user.entity";
 import { AccessTokenDto } from "./auth/dto/access-token.dto";
 import { ProfileResponseDto } from "./auth/dto/profile-response.dto";
@@ -50,7 +56,7 @@ export class AppController {
   //
   @ApiBearerAuth()
   @ApiOkResponse({
-    type: User,
+    type: OmitType(User, ["password"] as const),
   })
   @ApiUnauthorizedResponse({
       description: 'Unauthorized',
