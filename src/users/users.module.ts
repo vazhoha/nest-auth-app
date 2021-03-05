@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "./entities/user.entity";
 import { UsersService } from './users.service';
+import { ConfigModule } from "@nestjs/config";
+import bcryptConfig from './config/bcrypt.config';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { UsersService } from './users.service';
         schema: UserSchema,
       }
     ]),
+    ConfigModule.forFeature(bcryptConfig),
   ],
-  providers: [UsersService]
+  providers: [UsersService],
+  exports: [UsersService],
 })
 export class UsersModule {}
