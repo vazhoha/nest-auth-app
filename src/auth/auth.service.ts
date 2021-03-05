@@ -5,6 +5,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "../users/entities/user.entity";
 import { AccessTokenDto } from "./dto/access-token.dto";
 import { ProfileResponseDto } from "./dto/profile-response.dto";
+import { RegisterResponseDto } from "./dto/register-response.dto";
 
 @Injectable()
 export class AuthService {
@@ -13,11 +14,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(userCredentialsDto: UserCredentialsDto): Promise<any> {
+  async validateUser(userCredentialsDto: UserCredentialsDto): Promise<ProfileResponseDto> {
     return this.usersService.validateCredentials(userCredentialsDto);
   }
 
-  async register(userCredentialsDto: UserCredentialsDto): Promise<ProfileResponseDto> {
+  async register(userCredentialsDto: UserCredentialsDto): Promise<RegisterResponseDto> {
     const user = await this.usersService.signUp(userCredentialsDto);
 
     const payload = { sub: user._id.toString() };

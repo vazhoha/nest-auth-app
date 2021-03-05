@@ -20,9 +20,9 @@ import {
   ApiUnauthorizedResponse,
   OmitType
 } from "@nestjs/swagger";
-import { User } from "./users/entities/user.entity";
 import { AccessTokenDto } from "./auth/dto/access-token.dto";
 import { ProfileResponseDto } from "./auth/dto/profile-response.dto";
+import { RegisterResponseDto } from "./auth/dto/register-response.dto";
 
 @ApiTags('Users')
 @Controller()
@@ -33,7 +33,7 @@ export class AppController {
 
   //
   @ApiCreatedResponse({
-    type: ProfileResponseDto,
+    type: RegisterResponseDto,
   })
   @Post('signup')
   async signUp(@Body() userCredentialsDto: UserCredentialsDto) {
@@ -56,7 +56,7 @@ export class AppController {
   //
   @ApiBearerAuth()
   @ApiOkResponse({
-    type: OmitType(User, ["password"] as const),
+    type: ProfileResponseDto,
   })
   @ApiUnauthorizedResponse({
       description: 'Unauthorized',
